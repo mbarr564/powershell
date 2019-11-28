@@ -1,4 +1,7 @@
-﻿#I’m useless without a cup of coffee in the morning.
+#This script was written as part of BitTitan's application process. I'm quite aware that it does nothing of value.
+#They asked for a "rube goldberg" style script, so I wrote them this "rube goldberg" style script, in early 2016.
+#It performed one function, the output of this string: I’m useless without a cup of coffee in the morning.
+
 function Get-MorningCoffee
 {
     $VerbosePreference = 'Continue' #throw "Error: string for output does not contain the correct word count!"
