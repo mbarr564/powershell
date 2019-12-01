@@ -6,6 +6,7 @@
 .DESCRIPTION
     Intended to be executed as a SCCM configuration baseline or AD GPO, against site endpoints/workstations.
     The resulting MSSQL table of licensed software per device is then used to generate licensed software reports.
+    This script is intended for sites that do not have Asset Intelligence enabled for security/policy reasons.
     Required components to make this script function as intended:
     - CSV pattern table: https://github.com/mbarr425/powershell/blob/master/software_patterns-template.csv ("software_patterns.csv")
     - New SCCM config baseline or group policy object, that runs this script.
