@@ -1,18 +1,18 @@
 ﻿<#
 .SYNOPSIS
     Searches SCCM driver repository for matching device drivers, from an input string hashtable.
-    The input string expected is output from this command: Get-WmiObject Win32_PNPEntity | Where-Object {$_.ConfigManagerErrorCode -ne 0} | Select Name, DeviceID
+    The input string expected is output from this command (with single quotes added around names and values): Get-WmiObject Win32_PNPEntity | Where-Object {$_.ConfigManagerErrorCode -ne 0} | Select Name, DeviceID
     This script was requested by a coworker to expedite the process of detecting and correcting missing drivers during workstation SCCM imaging.
     Essentially this script performs the Windows OS task of searching for matching drivers, but uses a faster cached lookup, from an email body copy and paste.
 .DESCRIPTION
     Intended to be run via supplied link from the Report-MissingDrivers script's email body, sent when missing drivers are detected.
-    The string must be formatted as a pseudo here-string, with "`n" linebreaks between table elements.
+    The string must be formatted as a pseudo here-string, with single quoted names and values, with "`n" linebreaks between table elements.
 .PARAMETER RefreshCache
     If param -RefreshCache:$true is supplied, the local INF cache file will be updated from the DriverPackages share path.
 .EXAMPLE
-    .\Search-MissingDriver.ps1 -Devices "deviceName1=deviceValue1`ndeviceName2=deviceValue2`ndeviceName3=deviceValue3`n"
+    .\Search-MissingDriver.ps1 -Devices "'deviceName1'='deviceValue1'`n'deviceName2'='deviceValue2'`n'deviceName3'='deviceValue3'`n"
 .EXAMPLE
-    .\Search-MissingDriver.ps1 -Devices "deviceName1=deviceValue1"
+    .\Search-MissingDriver.ps1 -Devices "'PCI Memory Controller'='PCI\\VEN_8086&DEV_A2A1&SUBSYS_829A103C&REV_00\\3&11583659&0&FA'`n'Unknown 1'='USB\\VID_8087&PID_0A2B\\5&1272F2AF&0&14'`n'SM Bus Controller'='PCI\\VEN_8086&DEV_A2A3&SUBSYS_829A103C&REV_00\\3&11583659&0&FC'`n'PCI Serial Port'='PCI\\VEN_8086&DEV_A2BD&SUBSYS_829A103C&REV_00\\3&11583659&0&B3'`n'PCI Data Acquisition and Signal Processing Controller'='PCI\\VEN_8086&DEV_A2B1&SUBSYS_829A103C&REV_00\\3&11583659&0&A2'`n'PCI Simple Communications Controller'='PCI\\VEN_8086&DEV_A2BA&SUBSYS_829A103C&REV_00\\3&11583659&0&B0'`n"
 .NOTES
     Last update: mike.barr@esd.wa.gov - Thursday, August 2, 2018 12:49:44 PM
 #>
